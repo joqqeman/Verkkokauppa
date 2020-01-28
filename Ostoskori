@@ -1,0 +1,40 @@
+
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class Ostoskori {
+    
+    private Map<String, Ostos> ostoskori;
+    
+    public Ostoskori() {
+        this.ostoskori = new HashMap<String, Ostos>();
+    }
+    
+    public void lisaa(String tuote, int hinta) {
+        Ostos ostos = new Ostos(tuote, 1, hinta);
+            
+        if (this.ostoskori.containsKey(ostos)) {
+           ostos.kasvataMaaraa();
+        }
+        else {
+            this.ostoskori.put(tuote, ostos);
+        }
+    }
+    
+    public int hinta() {
+        int yhteishinta = 0;
+        for (Ostos ostos : this.ostoskori.values()) {
+            yhteishinta = yhteishinta + ostos.hinta();
+        }
+        return yhteishinta;
+    }
+    
+    public void tulosta() {
+        for (Ostos ostos : this.ostoskori.values()) {
+            System.out.println(ostos.toString());
+        }
+    }
+
+    
+}
